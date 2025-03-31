@@ -77,8 +77,11 @@ app.get("/note", requireAuth(), async (req, res) => {
   }
 });
 
+// HOME ROUTE
 app.get("/", (req, res) => {
-  res.json({ data: "hello" });
+  res.json({
+    data: "Visit https://clerk-note-client.vercel.app to see whats cooking ✨",
+  });
 });
 
 if (!process.env.PROD) {
