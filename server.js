@@ -78,7 +78,7 @@ app.get("/note", requireAuth(), async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Visit this website to see this api work");
+  res.json({ data: "hello" });
 });
 
 if (!process.env.PROD) {
