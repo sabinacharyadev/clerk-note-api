@@ -77,6 +77,10 @@ app.get("/note", requireAuth(), async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Visit this website to see this api work");
+});
+
 if (!process.env.PROD) {
   app.listen(PORT, (error) => {
     error
