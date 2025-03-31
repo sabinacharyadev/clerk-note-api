@@ -5,5 +5,8 @@ export const createNote = (noteObject) => {
 };
 
 export const findNotes = async (userId) => {
-  return noteModel.find({ userId: userId }, "_id note");
+  return noteModel.find(
+    { userId: userId },
+    "_id note updatedAt backgroundColor"
+  );
 };

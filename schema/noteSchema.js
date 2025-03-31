@@ -11,6 +11,10 @@ const noteSchema = mongoose.Schema(
       required: true,
       ref: "user",
     },
+    backgroundColor: {
+      type: String,
+      default: "bg-white text-black",
+    },
   },
   {
     timestamps: true,

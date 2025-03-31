@@ -5,6 +5,7 @@ import { connectToDb } from "./config/dbConfig.js";
 import { requireAuth } from "@clerk/express";
 import { createUser, findUserByEmail, updateUser } from "./model/userModel.js";
 import { createNote, findNotes } from "./model/noteModel.js";
+import { noteBackgroundColorGenerator } from "./utility/noteBackgroundColorSelector.js";
 
 const app = express();
 const PORT = process.env.PROD || 3000;
@@ -50,7 +51,11 @@ app.post("/saveUser", requireAuth(), async (req, res) => {
 app.post("/note", requireAuth(), async (req, res) => {
   try {
     const { userId, note } = req.body;
-    const response = await createNote({ userId, note });
+    const response = await createNote({
+      userId,
+      note,
+      backgroundColor: noteBackgroundColorGenerator(),
+    });
     if (response._id) {
       res.json({ data: response });
     }
