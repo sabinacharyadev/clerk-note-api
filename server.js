@@ -77,8 +77,14 @@ app.get("/note", requireAuth(), async (req, res) => {
   }
 });
 
-app.listen(PORT, (error) => {
-  error
-    ? console.log("Could not start server")
-    : console.log("Server running successfully");
-});
+if (!process.env.PROD) {
+  app.listen(PORT, (error) => {
+    error
+      ? console.log("Could not start server")
+      : console.log("Server running successfully");
+  });
+}
+
+export default (req, res) => {
+  app(req, res);
+};
