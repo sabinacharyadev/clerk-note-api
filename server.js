@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Apply centralized middleware
-app.use(requireAuth());
+// app.use(requireAuth());
 
 connectToDb();
 
