@@ -23,6 +23,7 @@ noteRouter.post("/", requireAuth(), async (req, res) => {
       res.json({ data: response });
     }
   } catch (error) {
+    console.log(error);
     res.json({ error: error });
   }
 });
@@ -31,11 +32,11 @@ noteRouter.post("/", requireAuth(), async (req, res) => {
 noteRouter.get("/", requireAuth(), async (req, res) => {
   try {
     const { userid } = req.headers;
-
     const note = await findNotes(userid);
 
-    note.length ? res.json({ data: note }) : res.json({ data: note });
+    note.length ? res.json({ data: note }) : res.json({ note });
   } catch (error) {
+    console.log(error);
     res.json({ error: error, message: "Something went wrong" });
   }
 });
@@ -60,9 +61,9 @@ noteRouter.delete("/", requireAuth(), async (req, res) => {
   try {
     const deletedNotes = await deleteNotes(req.body);
     const { acknowledged, deletedCount } = deletedNotes;
-    deleteNotes.acknowledged
+    deletedNotes.acknowledged
       ? res.json({ data: `${deletedCount} note(s) deleted` })
-      : res.json({ message: "could not create note" });
+      : res.json({ message: "could not delete note" });
   } catch (error) {
     console.log(error);
     res.json({ error: "Something went wrong" });
