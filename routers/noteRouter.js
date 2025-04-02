@@ -56,10 +56,13 @@ noteRouter.patch("/", requireAuth(), async (req, res) => {
 });
 
 // DELETE NOTES
-noteRouter.delete("/", async (req, res) => {
+noteRouter.delete("/", requireAuth(), async (req, res) => {
   try {
     const deletedNotes = await deleteNotes(req.body);
-    console.log(deletedNotes);
+    const { acknowledged, deletedCount } = deletedNotes;
+    deleteNotes.acknowledged
+      ? res.json({ data: `${deletedCount} note(s) deleted` })
+      : res.json({ message: "could not create note" });
   } catch (error) {
     console.log(error);
     res.json({ error: "Something went wrong" });
