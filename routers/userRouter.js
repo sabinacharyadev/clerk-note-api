@@ -1,6 +1,6 @@
 import express from "express";
 import { requireAuth } from "@clerk/express";
-import { createUser, findUserByEmail, updateUser } from "../model/userModel";
+import { createUser, findUserByEmail, updateUser } from "../model/userModel.js";
 
 const userRouter = express.Router();
 

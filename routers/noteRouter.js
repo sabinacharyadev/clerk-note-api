@@ -1,7 +1,7 @@
 import express from "express";
 import { requireAuth } from "@clerk/express";
-import { createNote, findNotes } from "../model/noteModel";
-import { noteBackgroundColorGenerator } from "../utility/noteBackgroundColorSelector";
+import { createNote, findNotes, updateNote } from "../model/noteModel.js";
+import { noteBackgroundColorGenerator } from "../utility/noteBackgroundColorSelector.js";
 
 const noteRouter = express.Router();
 
@@ -32,6 +32,21 @@ noteRouter.get("/", requireAuth(), async (req, res) => {
     note.length ? res.json({ data: note }) : res.json({ data: note });
   } catch (error) {
     res.json({ error: error, message: "Something went wrong" });
+  }
+});
+
+// UPDATE NOTE
+noteRouter.patch("/", requireAuth(), async (req, res) => {
+  try {
+    const { note } = req.body;
+
+    const updatedNote = await updateNote(note);
+    updatedNote._id
+      ? res.json({ data: note })
+      : res.json({ message: "could not create note" });
+  } catch (error) {
+    console.log(error);
+    res.json({ error: "Something went wrong" });
   }
 });
 

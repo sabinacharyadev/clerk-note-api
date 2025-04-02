@@ -12,8 +12,8 @@ export const findNotes = async (userId) => {
 };
 
 export const updateNote = async (noteObject) => {
-  const { id } = noteObject;
-  return noteModel.findOneAndUpdate(id, noteObject);
+  const { _id } = noteObject;
+  return noteModel.findOneAndUpdate({ _id }, noteObject);
 };
 
 export const deleteNotes = async (noteIds) => {
