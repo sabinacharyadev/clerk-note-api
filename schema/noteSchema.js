@@ -4,7 +4,6 @@ const noteSchema = mongoose.Schema(
   {
     note: {
       type: String,
-      required: true,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
