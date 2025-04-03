@@ -34,7 +34,7 @@ noteRouter.get("/", requireAuth(), async (req, res) => {
     const { userid } = req.headers;
     const note = await findNotes(userid);
 
-    note.length ? res.json({ data: note }) : res.json({ note });
+    note.length ? res.json({ data: note }) : res.json({ data: note });
   } catch (error) {
     console.log(error);
     res.json({ error: error, message: "Something went wrong" });
